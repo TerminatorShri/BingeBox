@@ -4,14 +4,16 @@
     "slug": "BingeBox",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/SplashIcon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
-    "android": {},
+    "android": {
+      "package": "com.terminatorshri.BingeBox"
+    },
     "web": {
       "bundler": "metro",
       "output": "static"
@@ -19,7 +21,7 @@
     "splash": {
       "image": "./assets/images/SplashIcon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#373C44"
     },
     "plugins": [
       "expo-router",
@@ -29,7 +31,7 @@
           "image": "./assets/images/SplashIcon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#373C44"
         }
       ]
     ],
