@@ -12,6 +12,7 @@ import { SearchBar } from "@rneui/themed";
 import { useRouter } from "expo-router";
 import AppData from "../../../assets/AppData.json"; // Import the JSON file
 import { SvgUri } from "react-native-svg"; // Import SvgUri
+import { useFonts } from "expo-font";
 
 type Movie = {
   show: {
@@ -21,10 +22,14 @@ type Movie = {
   };
 };
 
-export default function SearchScreen() {
+const SearchScreen: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [results, setResults] = useState<Movie[]>([]);
   const router = useRouter();
+
+  const [fontsLoaded] = useFonts({
+    Tajawal_Regular: require("../../../assets/fonts/Tajawal-Regular.ttf"),
+  });
 
   const searchMovies = (text: string) => {
     setQuery(text);
@@ -88,23 +93,29 @@ export default function SearchScreen() {
         />
       ) : (
         <View style={styles.iconContainer}>
-          <SvgUri
-            uri={randomIcon} // Using the SVG image URL
-            width={200}
-            height={200}
-          />
-          <Text style={styles.defaultText}>
-            Explore your favorite TV shows, movies, web series, and much more
-            all in one place!
-          </Text>
+          {fontsLoaded && (
+            <>
+              <SvgUri
+                uri={randomIcon} // Using the SVG image URL
+                width={200}
+                height={200}
+              />
+              <Text style={styles.defaultText}>
+                Explore your favorite TV shows, movies, web series, and much
+                more all in one place!
+              </Text>
+            </>
+          )}
         </View>
       )}
     </View>
   );
-}
+};
+
+export default SearchScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10, backgroundColor: "#393E46" },
+  container: { flex: 1, padding: 10, backgroundColor: "#222831" },
   searchBarContainer: {
     borderBottomColor: "transparent",
     borderTopColor: "transparent",
@@ -140,5 +151,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
     paddingHorizontal: 20,
+    fontFamily: "Tajawal_Regular",
   },
 });

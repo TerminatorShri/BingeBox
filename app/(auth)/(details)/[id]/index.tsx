@@ -12,8 +12,9 @@ import { Feather } from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { Wander } from "react-native-animated-spinkit";
-import { FontAwesome } from "@expo/vector-icons"; // For the star icon
-import { MaterialCommunityIcons } from "@expo/vector-icons"; // For the calendar and clock icons
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useFonts } from "expo-font";
 
 type MovieDetails = {
   id: number;
@@ -32,6 +33,12 @@ export default function DetailsScreen() {
   const [movie, setMovie] = useState<MovieDetails | null>(null);
   const router = useRouter();
 
+  const [fontsLoaded] = useFonts({
+    Kanit_Bold: require("../../../../assets/fonts/Kanit-Bold.ttf"),
+    Oxygen_Regular: require("../../../../assets/fonts/Oxygen-Regular.ttf"),
+    Tajawal_Regular: require("../../../../assets/fonts/Tajawal-Regular.ttf"),
+  });
+
   useEffect(() => {
     fetch(`https://api.tvmaze.com/shows/${id}`)
       .then((res) => res.json())
@@ -44,6 +51,10 @@ export default function DetailsScreen() {
         <Wander size={48} color="white" />
       </View>
     );
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>
@@ -180,10 +191,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
     color: "white",
     marginTop: 10,
     marginBottom: 10,
+    fontFamily: "Kanit_Bold",
   },
   rowContainer: {
     flexDirection: "row",
@@ -221,14 +232,20 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginTop: 5,
   },
-  chipText: { color: "white", fontSize: 14 },
-  text: { fontSize: 16, color: "lightgray", marginBottom: 5 },
-  summary: {
+  chipText: { color: "white", fontSize: 14, fontFamily: "Tajawal_Regular" },
+  text: {
     fontSize: 16,
+    color: "lightgray",
+    marginBottom: 5,
+    fontFamily: "Oxygen_Regular",
+  },
+  summary: {
+    fontSize: 14,
     color: "#E1E1E1", // Light white color for the description
     marginBottom: 20,
     paddingHorizontal: 15, // Added padding
     paddingTop: 10, // Optional: Add padding top for spacing
+    fontFamily: "Oxygen_Regular",
   },
   icon: { marginRight: 10, marginTop: -2 }, // Adjusted marginTop for alignment
 });

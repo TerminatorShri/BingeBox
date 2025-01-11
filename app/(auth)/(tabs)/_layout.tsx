@@ -12,7 +12,7 @@ export default function TabsLayout() {
             <Ionicons name="home" size={size} color={color} />
           ),
           headerShown: false,
-          tabBarStyle: { backgroundColor: "#222831" },
+          tabBarStyle: { backgroundColor: "#000000" },
         }}
       />
       <Tabs.Screen
@@ -23,7 +23,7 @@ export default function TabsLayout() {
             <Ionicons name="search" size={size} color={color} />
           ),
           headerShown: false,
-          tabBarStyle: { backgroundColor: "#222831" },
+          tabBarStyle: { backgroundColor: "#000000" },
         }}
       />
     </Tabs>

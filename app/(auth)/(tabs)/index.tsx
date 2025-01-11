@@ -13,8 +13,7 @@ import { useRouter } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { SvgUri } from "react-native-svg";
-
-SplashScreen.preventAutoHideAsync();
+import { useFonts } from "expo-font";
 
 type Movie = {
   show: {
@@ -25,11 +24,17 @@ type Movie = {
   };
 };
 
-export default function HomeScreen() {
+const HomeScreen: React.FC = () => {
   const [moviesByGenre, setMoviesByGenre] = useState<
     { genre: string; movies: Movie[] }[]
   >([]);
   const router = useRouter();
+
+  const [fontsLoaded] = useFonts({
+    Jersey_Regular: require("../../../assets/fonts/Jersey15-Regular.ttf"),
+    Kanit_Bold: require("../../../assets/fonts/Kanit-Bold.ttf"),
+    Oxygen_Regular: require("../../../assets/fonts/Oxygen-Regular.ttf"),
+  });
 
   useEffect(() => {
     fetch("https://api.tvmaze.com/search/shows?q=all")
@@ -82,12 +87,18 @@ export default function HomeScreen() {
     </TouchableOpacity>
   );
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <MaterialIcons name="movie-creation" size={36} color="white" />
-          <Text style={styles.headerTitle}>BingeBox</Text>
+          <Text style={[styles.headerTitle, { fontFamily: "Jersey_Regular" }]}>
+            BingeBox
+          </Text>
         </View>
         <TouchableOpacity style={styles.profileButton}>
           <Feather name="user" size={24} color="white" />
@@ -123,35 +134,36 @@ export default function HomeScreen() {
       </ScrollView>
     </View>
   );
-}
+};
+
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: "#393E46",
+    backgroundColor: "#222831",
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", // Ensures spacing between left and right elements
+    justifyContent: "space-between",
     paddingVertical: 8,
     borderBottomWidth: 1,
     borderBottomColor: "lightgray",
     marginBottom: 10,
   },
   headerLeft: {
-    flexDirection: "row", // Group icon and title together
+    flexDirection: "row",
     alignItems: "center",
   },
   headerTitle: {
     color: "white",
-    fontWeight: "bold",
-    fontSize: 24,
+    fontSize: 36,
     marginLeft: 10,
   },
   profileButton: {
-    padding: 8, // Adds touchable area for the profile icon
+    padding: 8,
   },
   genreSection: {
     marginBottom: 20,
@@ -159,8 +171,8 @@ const styles = StyleSheet.create({
   genreTitle: {
     color: "white",
     fontSize: 18,
-    fontWeight: "bold",
     marginBottom: 10,
+    fontFamily: "Kanit_Bold",
   },
   movieImageContainer: {
     marginRight: 10,
@@ -176,7 +188,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
     padding: 10,
-    backgroundColor: "#222831",
+    backgroundColor: "#0d0a0a",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
@@ -189,8 +201,9 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "left",
     flex: 1,
+    fontFamily: "Oxygen_Regular",
   },
 });
