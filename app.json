@@ -4,7 +4,6 @@
     "slug": "BingeBox",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/SplashIcon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -29,7 +28,7 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/SplashIcon.png",
-          "imageWidth": 200,
+          "imageWidth": 400,
           "resizeMode": "contain",
           "backgroundColor": "#373C44"
         }
