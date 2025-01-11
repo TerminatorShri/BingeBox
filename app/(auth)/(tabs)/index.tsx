@@ -37,15 +37,17 @@ const HomeScreen: React.FC = () => {
   });
 
   useEffect(() => {
-    fetch("https://api.tvmaze.com/search/shows?q=all")
-      .then((res) => res.json())
-      .then((data) => {
-        const filteredMovies = data.filter(
-          (item: Movie) => item.show.id !== 65759
-        ); // Removed movie with ID 65759 because image was not visible
-        groupMoviesByGenre(filteredMovies);
-        SplashScreen.hideAsync();
-      });
+    const fetchData = async () => {
+      const res = await fetch("https://api.tvmaze.com/search/shows?q=all");
+      const data = await res.json();
+      const filteredMovies = data.filter(
+        (item: Movie) => item.show.id !== 65759
+      ); // Removed movie with ID 65759 because image was not visible
+      groupMoviesByGenre(filteredMovies);
+      await SplashScreen.hideAsync();
+    };
+
+    fetchData();
   }, []);
 
   const shuffleArray = (array: Movie[]) => {
