@@ -3,31 +3,27 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function TabsLayout() {
   return (
-    <Tabs
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }: { color: string; size: number }) => {
-          let iconName: string = "";
-
-          // Define tab icons for Home and Search
-          if (route.name === "index") iconName = "home"; // Home tab
-          else if (route.name === "search") iconName = "search"; // Search tab
-
-          // Return appropriate icon
-          return <Ionicons name={iconName as keyof typeof Ionicons.glyphMap} size={size} color={color} />;
-        },
-        tabBarShowLabel: false, // Hide labels in the tab bar
-      })}
-    >
+    <Tabs screenOptions={{ tabBarActiveTintColor: "white" }}>
       <Tabs.Screen
-        name="index" // This is the Home screen, set as the default tab
+        name="index"
         options={{
           title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+          headerShown: false,
+          tabBarStyle: { backgroundColor: "#222831" },
         }}
       />
       <Tabs.Screen
         name="search"
         options={{
           title: "Search",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search" size={size} color={color} />
+          ),
+          headerShown: false,
+          tabBarStyle: { backgroundColor: "#222831" },
         }}
       />
     </Tabs>

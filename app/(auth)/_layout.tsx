@@ -4,11 +4,13 @@ import { StatusBar } from "react-native";
 export default function AuthLayout() {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" backgroundColor="black" />
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="[id]" options={{ presentation: "modal" }} />
-        <Stack.Screen name="temp" options={{ presentation: "modal" }} />
+        <Stack.Screen
+          name="(details)/[id]/index"
+          options={{ presentation: "modal" }}
+        />
       </Stack>
     </>
   );
